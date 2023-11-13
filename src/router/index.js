@@ -1,15 +1,16 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import layout from '@/layout'
 
-const routes = [
-  {
-    path: '/login',
-    component: () => import('@/views/login/index')
-  },
-  {
-    path: '/',
-    component: () => import('@/layout/index')
-  }
-]
+// const routes = [
+//   {
+//     path: '/login',
+//     component: () => import('@/views/login/index')
+//   },
+//   {
+//     path: '/',
+//     component: () => import('@/layout/index')
+//   }
+// ]
 
 /**
  * 私有路由表
@@ -148,7 +149,7 @@ const publicRoutes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes: [...publicRoutes, ...privateRoutes]
 })
 
 export default router
