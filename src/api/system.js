@@ -1,6 +1,15 @@
 import request from '@/utils/request'
 
 /**
+ * 获取用户信息
+ */
+export const getUserInfo = () => {
+  return request({
+    url: '/system/user/profile'
+  })
+}
+
+/**
  * 登录
  */
 export const login = data => {
