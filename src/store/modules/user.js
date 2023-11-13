@@ -1,6 +1,8 @@
 import { login, getUserInfo } from '@/api/system'
-import { setItem, getItem } from '@/utils/storage'
+import { setItem, getItem, removeAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
+import router from '@/router'
+import { setTimeStamp } from '@/utils/auth'
 
 export default {
   namespaced: true,
@@ -18,6 +20,12 @@ export default {
     }
   },
   actions: {
+    logout() {
+      this.commit('user/setToken', '')
+      this.commit('user/setUserInfo', {})
+      removeAllItem()
+      router.push('/login')
+    },
     login(context, userInfo) {
       const { username, password } = userInfo
       return new Promise((resolve, reject) => {
@@ -26,9 +34,10 @@ export default {
           password
         })
           .then((data) => {
-            resolve(data)
             console.log(data)
+            setTimeStamp()
             this.commit('user/setToken', data.token)
+            resolve(data)
           })
           .catch((err) => {
             reject(err)
