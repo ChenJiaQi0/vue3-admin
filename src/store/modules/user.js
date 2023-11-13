@@ -22,9 +22,9 @@ export default {
           password
         })
           .then((data) => {
-            console.log(data.data)
-            this.commit('user/setToken', data.data.token)
             resolve(data)
+            console.log(data)
+            this.commit('user/setToken', data.token)
           })
           .catch((err) => {
             reject(err)
