@@ -143,6 +143,11 @@ const publicRoutes = [
         path: '/401',
         name: '401',
         component: () => import('@/views/error-page/401')
+      },
+      {
+        path: '/:catchAll(.*)',
+        name: '404',
+        component: () => import('@/views/error-page/404.vue')
       }
     ]
   }
