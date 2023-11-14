@@ -3,9 +3,9 @@
 #app {
   .main-container {
     min-height: 100%;
-    transition: margin-left 0.28s;
     margin-left: $sideBarWidth;
     position: relative;
+    transition: margin-left #{$sideBarDuration};
   }
 
   .sidebar-container {
@@ -16,7 +16,7 @@
     width: $sideBarWidth !important;
     height: 100%;
     background-color: $menuBg;
-    transition: width 0.28s;
+    transition: width #{$sideBarDuration};
     z-index: 1001;
     overflow: hidden;
 
