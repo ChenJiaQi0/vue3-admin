@@ -6,6 +6,8 @@
       <div class="fixed-header">
         <!-- 顶部的 navbar -->
         <navbar />
+        <!-- tags -->
+        <tags-view></tags-view>
       </div>
       <!-- 内容区 -->
       <AppMain />
@@ -14,6 +16,7 @@
 </template>
 
 <script setup>
+import TagsView from '@/components/TagsView'
 import { watch } from 'vue'
 import { isTags } from '@/utils/tags'
 import { generateTitle } from '@/utils/i18n'

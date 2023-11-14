@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>个人中心</h2>
     <el-row>
       <el-button>Default</el-button>
       <el-button type="primary">Primary</el-button>
