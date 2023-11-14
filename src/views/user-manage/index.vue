@@ -19,8 +19,8 @@
         <el-table-column prop="dept.deptName" label="部门"> </el-table-column>
         <el-table-column prop="createTime" label="创建时间"> </el-table-column>
         <el-table-column label="操作" fixed="right" width="260">
-          <template #default>
-            <el-button type="primary" size="small">查看</el-button>
+          <template v-slot="{ row }">
+            <el-button type="primary" size="small" @click="onShowClick(row.userId)">查看</el-button>
             <el-button type="info" size="small">编辑</el-button>
             <el-button type="danger" size="small">删除</el-button>
           </template>
@@ -39,6 +39,13 @@ import ExportToExcel from './components/Export2Excel.vue'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { getUserManageList } from '@/api/system'
+
+/**
+ * 查看按钮点击事件
+ */
+const onShowClick = (id) => {
+  router.push(`/user/info/${id}`)
+}
 
 const router = useRouter()
 /**
