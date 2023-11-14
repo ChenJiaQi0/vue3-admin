@@ -13,9 +13,11 @@ import './styles/index.scss'
 import installIcons from '@/icons'
 // 导入权限控制模块
 import './permission'
+import installDirective from '@/directives'
 
 const app = createApp(App)
 installElementPlus(app)
 installIcons(app)
 installFilter(app)
+installDirective(app)
 app.use(store).use(router).use(i18n).mount('#app')

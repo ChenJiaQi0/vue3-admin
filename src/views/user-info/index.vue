@@ -1,55 +1,57 @@
 <template>
   <div class="container">
     <el-card class="print-box">
-      <el-button type="primary">打印用户信息</el-button>
+      <el-button type="primary" :loading="printLoading" v-print="printObj">打印用户信息</el-button>
     </el-card>
     <el-card>
-      <div class="user-info-box">
-        <!-- 标题 -->
-        <h2 class="title">用户信息</h2>
+      <div id="userInfoBox" class="user-info-box">
+        <div class="user-info-box">
+          <!-- 标题 -->
+          <h2 class="title">用户信息</h2>
 
-        <div class="header">
-          <!-- 头部渲染表格 -->
-          <el-descriptions :column="2" border>
-            <el-descriptions-item label="姓名">{{ userInfo.name }}</el-descriptions-item>
-            <el-descriptions-item label="性别">{{ userInfo.sex }}</el-descriptions-item>
-            <el-descriptions-item label="民族">{{ userInfo.nation }}</el-descriptions-item>
-            <el-descriptions-item label="手机号">{{ userInfo.mobile }}</el-descriptions-item>
-            <el-descriptions-item label="地址">{{ userInfo.address }}</el-descriptions-item>
-            <el-descriptions-item label="入职时间">{{ userInfo.date }}</el-descriptions-item>
-            <el-descriptions-item label="备注" :span="2">
-              <el-tag class="remark" size="small">{{ userInfo.remark }}</el-tag>
-            </el-descriptions-item>
-          </el-descriptions>
-          <!-- 头像渲染 -->
-          <el-image class="avatar" :src="userInfo.avatar"></el-image>
+          <div class="header">
+            <!-- 头部渲染表格 -->
+            <el-descriptions :column="2" border>
+              <el-descriptions-item label="姓名">{{ userInfo.name }}</el-descriptions-item>
+              <el-descriptions-item label="性别">{{ userInfo.sex }}</el-descriptions-item>
+              <el-descriptions-item label="民族">{{ userInfo.nation }}</el-descriptions-item>
+              <el-descriptions-item label="手机号">{{ userInfo.mobile }}</el-descriptions-item>
+              <el-descriptions-item label="地址">{{ userInfo.address }}</el-descriptions-item>
+              <el-descriptions-item label="入职时间">{{ userInfo.date }}</el-descriptions-item>
+              <el-descriptions-item label="备注" :span="2">
+                <el-tag class="remark" size="small">{{ userInfo.remark }}</el-tag>
+              </el-descriptions-item>
+            </el-descriptions>
+            <!-- 头像渲染 -->
+            <el-image class="avatar" :src="userInfo.avatar"></el-image>
+          </div>
+          <div class="body">
+            <!-- 内容渲染表格 -->
+            <el-descriptions direction="vertical" :column="1" border>
+              <el-descriptions-item label="个人经历">
+                <ul>
+                  <li v-for="(item, index) in userInfo.experience" :key="index">
+                    <span>
+                      {{ $filters.dateFilter(item.startTime, 'YYYY/MM') }}
+                      ----
+                      {{ $filters.dateFilter(item.endTime, 'YYYY/MM') }}</span
+                    >
+                    <span>{{ item.title }}</span>
+                    <span>{{ item.desc }}</span>
+                  </li>
+                </ul>
+              </el-descriptions-item>
+              <el-descriptions-item label="专业">
+                {{ userInfo.major }}
+              </el-descriptions-item>
+              <el-descriptions-item label="岗位">
+                {{ userInfo.post }}
+              </el-descriptions-item>
+            </el-descriptions>
+          </div>
+          <!-- 尾部签名 -->
+          <div class="foot">{{ userInfo.foot }}</div>
         </div>
-        <div class="body">
-          <!-- 内容渲染表格 -->
-          <el-descriptions direction="vertical" :column="1" border>
-            <el-descriptions-item label="个人经历">
-              <ul>
-                <li v-for="(item, index) in userInfo.experience" :key="index">
-                  <span>
-                    {{ $filters.dateFilter(item.startTime, 'YYYY/MM') }}
-                    ----
-                    {{ $filters.dateFilter(item.endTime, 'YYYY/MM') }}</span
-                  >
-                  <span>{{ item.title }}</span>
-                  <span>{{ item.desc }}</span>
-                </li>
-              </ul>
-            </el-descriptions-item>
-            <el-descriptions-item label="专业">
-              {{ userInfo.major }}
-            </el-descriptions-item>
-            <el-descriptions-item label="岗位">
-              {{ userInfo.post }}
-            </el-descriptions-item>
-          </el-descriptions>
-        </div>
-        <!-- 尾部签名 -->
-        <div class="foot">{{ userInfo.foot }}</div>
       </div>
     </el-card>
   </div>
@@ -93,6 +95,23 @@ const userInfo = ref({
   post: 'Web 全栈开发',
   foot: '开到荼蘼'
 })
+
+// 打印相关
+const printLoading = ref(false)
+const printObj = {
+  // 打印区域
+  id: 'userInfoBox',
+  // 打印标题
+  popTitle: 'imooc-vue-element-admin',
+  // 打印前
+  beforeOpenCallback(vue) {
+    printLoading.value = true
+  },
+  // 执行打印
+  openCallback(vue) {
+    printLoading.value = false
+  }
+}
 </script>
 
 <style lang="scss" scoped>
