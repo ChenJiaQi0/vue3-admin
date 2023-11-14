@@ -5,6 +5,7 @@
     <div class="right-menu">
       <lang-select class="right-menu-item hover-effect" />
       <theme-picker class="right-menu-item hover-effect" />
+      <screenfull class="right-menu-item hover-effect" />
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -35,6 +36,7 @@ import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
+import Screenfull from '@/components/Screenfull'
 
 const route = useRoute()
 // 生成数组数据
