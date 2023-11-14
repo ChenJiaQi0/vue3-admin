@@ -4,6 +4,7 @@
       <el-avatar :size="logoHeight" shape="square" src="https://i2.100024.xyz/2023/11/12/10j9cux.webp" />
       <h1 class="logo-title" v-if="$store.getters.sidebarOpened">super-admin</h1>
     </div>
+    <span style="color: #fff; margin-left: 20px">{{ $filters.dateFilter(now) }}</span>
     <el-scrollbar>
       <sidebar-menu></sidebar-menu>
     </el-scrollbar>
@@ -15,6 +16,7 @@ import {} from 'vue'
 import SidebarMenu from './SidebarMenu'
 
 const logoHeight = 44
+const now = new Date().getTime()
 </script>
 
 <style lang="scss" scoped>
