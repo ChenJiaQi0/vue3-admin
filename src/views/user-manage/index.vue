@@ -3,11 +3,11 @@
     <el-card class="header">
       <div>
         <el-button type="primary" @click="onImportExcelClick"> excel 导入</el-button>
-        <el-button type="success"> excel 导出 </el-button>
+        <el-button type="success" @click="onToExcelClick"> excel 导出 </el-button>
       </div>
     </el-card>
     <el-card>
-      <el-table :data="tableData" border style="width: 100%">
+      <el-table :data="tableData" border style="width: 100%" show-overflow-tooltip>
         <el-table-column label="id" type="index" />
         <el-table-column prop="nickName" label="姓名"> </el-table-column>
         <el-table-column prop="phonenumber" label="手机号"> </el-table-column>
@@ -29,10 +29,12 @@
 
       <el-pagination background layout="sizes, prev, pager, next, jumper" :total="total" />
     </el-card>
+    <export-to-excel v-model="exportToExcelVisible"></export-to-excel>
   </div>
 </template>
 
 <script setup>
+import ExportToExcel from './components/Export2Excel.vue'
 // 脚本
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
@@ -56,6 +58,14 @@ const getListData = async () => {
   console.log(total.value)
 }
 getListData()
+
+/**
+ * excel 导出点击事件
+ */
+const exportToExcelVisible = ref(false)
+const onToExcelClick = () => {
+  exportToExcelVisible.value = true
+}
 </script>
 
 <style lang="scss" scoped>
